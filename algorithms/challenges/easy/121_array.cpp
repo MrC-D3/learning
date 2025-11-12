@@ -1,15 +1,17 @@
+// Time: 20m. OK.
 // You are given an array prices where prices[i] is the price of a given stock 
 // on the ith day. You want to maximize your profit by choosing a single day to 
 // buy one stock and choosing a different day in the future to sell that stock.
 // Return the maximum profit you can achieve from this transaction. If you 
 // cannot achieve any profit, return 0.
+// 0 <= prices[i] <= 10^4; 1 <= prices.length <= 10^5.
 // Example 1: Input: prices = [7,1,5,3,6,4] Output: 5
 // Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit =
 //  6-1 = 5. Note that buying on day 2 and selling on day 1 is not allowed 
 // because you must buy before you sell.
 
 #include <vector>
-
+#include <algorithm>
 
 using namespace std;
 
@@ -18,21 +20,23 @@ class Solution
 public:
     int maxProfit(vector<int>& prices) 
     {
-        int max_gain = 0;
-        int min = prices[0];
-        for (int i = 1; i < prices.size(); i++)
+        if (prices.size() == 1)
         {
-            int current_gain = prices[i]-min;
-            if (current_gain < 0)
-            {
-                min = prices[i];
-            }
-            else if (current_gain > max_gain)
-            {
-                max_gain = current_gain;
-            }
+            return 0;
         }
 
-        return max_gain;
+        int min_price{prices[0]}, to_return{0};
+        for (auto price : prices)
+        {
+            if (price <= min_price)
+            {
+                min_price = price;
+                continue;
+            }
+            
+            to_return = max(to_return, price - min_price);
+        }
+
+        return to_return;
     }
 };
