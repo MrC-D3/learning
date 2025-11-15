@@ -5,12 +5,93 @@
 
 using namespace std;
 
-class Solution { // Don't use the delta offset thanks to the reverse iterators.
+class Solution { // Reduce duplicated code and simplify the logic.
+public:
+    string addBinary(string a, string b) {
+        string sum;
+        int carry = 0;
+        auto it_a = a.rbegin();
+        auto it_b = b.rbegin();
+        while (it_a != a.rend() || it_b != b.rend() || carry != 0)
+        {
+            auto current_sum = carry;
+            if (it_a != a.rend())
+            {
+                current_sum += (*it_a - '0');
+                it_a++;
+            }
+            if (it_b != b.rend())
+            {
+                current_sum += (*it_b - '0');
+                it_b++;
+            }
+            sum.push_back( '0' + (current_sum % 2) );
+            carry = current_sum / 2;
+        }
+
+        reverse(sum.begin(), sum.end());
+        return sum;
+    }
+};
+
+class Solution_v3 { // Don't check which string is the shortest.
+public:
+    string addBinary(string a, string b) {
+        string sum;
+        char carry = '0';
+
+        auto it_a = a.rbegin();
+        auto it_b = b.rbegin();
+        while (it_a != a.rend() || it_b != b.rend())
+        {
+            auto current_bit = carry;
+            carry = '0';
+            if (it_a != a.rend() && *it_a == '1')
+            {
+                if (current_bit == '0')
+                {
+                    current_bit = '1';
+                }
+                else
+                {
+                    current_bit = '0';
+                    carry = '1';
+                }
+                it_a++;
+            }
+            if (it_b != b.rend() && *it_b == '1')
+            {
+                if (current_bit == '0')
+                {
+                    current_bit = '1';
+                }
+                else
+                {
+                    current_bit = '0';
+                    carry = '1';
+                }
+                it_b++;
+            }
+
+            sum.push_back(current_bit);
+        }
+
+        if (carry == '1')
+        {
+            sum.push_back(carry);
+        }
+
+        reverse(sum.begin(), sum.end());
+        return sum;
+    }
+};
+
+class Solution_v2 { // Don't use the delta offset thanks to the reverse iterators.
 public:
     string addBinary(string a, string b) {
         // Find the longest and the shortest.
-        string sum{a};
-        string shortest{b};
+        string sum{a}; // 11
+        string shortest{b}; // 1
         if (a.size() < b.size())
         {
             sum = b;
@@ -28,6 +109,11 @@ public:
                 {
                     *it_sum = '0';
                 }
+                else
+                {
+                    *it_sum = '1';
+                    report = '0';
+                }
             }
             if (*it == '1')
             {
@@ -39,6 +125,25 @@ public:
                 else
                 {
                     *it_sum = '1';
+                }
+            }
+
+            it_sum++;
+        }
+
+        // Add the remaining bits from the longest, i.e. [delta, 0].
+        for (; it_sum != sum.rend(); it_sum++)
+        {
+            if (report == '1')
+            {
+                if (*it_sum == '1')
+                {
+                    *it_sum = '0';
+                }
+                else
+                {
+                    *it_sum = '1';
+                    report = '0';
                 }
             }
         }
@@ -54,16 +159,16 @@ public:
 
 class Solution_v1 { // Don't use a third string, but directly the string sum.
 public:
-    string addBinary(string a, string b) {
+    string addBinary(string a, string b) { // 11 + 1
         // Find the longest and the shortest, then compute the delta-offset.
-        string sum{a};
-        string shortest{b};
+        string sum{a}; // 11
+        string shortest{b}; // 1
         if (a.size() < b.size())
         {
             sum = b;
             shortest = a;
         }
-        auto delta = sum.size() - shortest.size();
+        auto delta = sum.size() - shortest.size(); // 1
 
         // Loop from min_size to 0 (adding the delta-offset for the longest).
         char report = '0';
@@ -75,13 +180,18 @@ public:
                 {
                     sum[delta+i] = '0';
                 }
+                else
+                {
+                    sum[delta+i] = '1';
+                    report = '0';
+                }
             }
             if (shortest[i] == '1')
             {
                 if (sum[delta+i] == '1')
                 {
                     sum[delta+i] = '0';
-                    report = '1';
+                    report = '1'; // x0 + 1
                 }
                 else
                 {
@@ -95,9 +205,14 @@ public:
         {
             if (report == '1')
             {
-                if (sum[delta+i] == '1')
+                if (sum[i] == '1')
                 {
-                    sum[delta+i] = '0';
+                    sum[i] = '0';
+                }
+                else
+                {
+                    sum[i] = '1';
+                    report = '0';
                 }
             }
         }
