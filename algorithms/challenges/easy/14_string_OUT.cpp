@@ -1,14 +1,19 @@
+// Time: 20m. First time was ok, but didn't check the time!
+// Return the longest prefix among a group of strings.
+// Constraints: strs.size in [1, 200]; strs[i].size in [0, 200]; only lowercase
+//  letters or empty string.
+
 #include <string>
 #include <vector>
-
+#include <algorithm>
 
 using namespace std;
 
-class Solution 
+class Solution // O(N*M), where M is strs[i].size().
 {
 public:
-    // If strs.size() << strs[i].size(), it may be more efficient to sort strs[]
-    //  and compare only first and last words.
+    // No cost advantage in sorting the strings, because true that you can just
+    //  just compare 1st and last strings, but sorting costs M*NlogN anyway.
     string longestCommonPrefix(vector<string>& strs) 
     {
         string to_return = strs[0];
