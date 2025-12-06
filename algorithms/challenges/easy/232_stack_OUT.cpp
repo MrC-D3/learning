@@ -1,5 +1,6 @@
 // Time 20m. OUT.
-// Implement a FIFO using only 2 stacks.
+// Implement a FIFO (push, peek, pop, empty) using only 2 stacks (push, peek, 
+//  pop, size, empty) and ensuring each operation has O(1) amortized cost.
 // Constraints: all pop/peek calls are valid; at most 100 calls overall.
 
 #include <stack>

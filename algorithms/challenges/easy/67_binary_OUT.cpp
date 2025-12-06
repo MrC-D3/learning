@@ -1,4 +1,6 @@
 // Time: 15m. OUT.
+// Return the string binary sum of 2 binary strings.
+// Constraints: no leading 0s, a.size and b.size in [1, 10^4].
 
 #include <string>
 #include <algorithm>

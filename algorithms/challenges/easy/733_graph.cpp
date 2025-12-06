@@ -1,9 +1,9 @@
 // Time 20m. OK.
 // Flood Fill.
-//  Starting from a cell C, change the color of C and all its adjacent cells. A
-//  cell is adjacent of C if it shares a border with C or with an adjacent cell.
-// 1 <= m, n <= 50
-// 0 <= image[i][j], color < 216
+//  Write color in image[sr][sc] and all its adjacent cells, where "adjacent"
+//  means the cell shares a border with [sr][sc] or with an adjacent cell.
+// Constraints: 1 <= rows, columns <= 50; 0 <= image[i][j], color < 2^16; 
+//  0 <= sr < rows; 0 <= sc < columns.
 
 #include <vector>
 #include <stack>

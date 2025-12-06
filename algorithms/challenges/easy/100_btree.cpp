@@ -1,4 +1,6 @@
 // Time: 20m. Ok.
+// Return true if 2 binary tree are identical.
+// Constraints: number of nodes in [0, 100]. 
 
 #include <deque>
 

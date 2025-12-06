@@ -1,6 +1,7 @@
 // Time: 20m. Ok.
-// Find the middle element of a Linked List. If 2 middle elemennts, return the
+// Find the middle element of a Linked List. If 2 middle elements, return the
 //  2nd.
+// Constraints: node number in [1, 100].
 
 /* Definition for singly-linked list. */
 struct ListNode {

@@ -1,4 +1,6 @@
 // Time: 20m. OUT.
+// Convert an ascending-ordered array in a height-balanced binary tree.
+// Constraints: nodes number in [1, 10^4].
 
 #include <vector>
 #include <queue>

@@ -1,5 +1,5 @@
 // Time 15m. OK.
-// Return true if ransomNote can be built using letters in magazine.
+// Return true if ransomNote can be built using (once) the letters in magazine.
 // Constraints: strings of only lowercase letters and length in [1, 10^5].
 
 #include <string>

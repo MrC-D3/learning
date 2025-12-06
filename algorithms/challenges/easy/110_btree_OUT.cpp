@@ -1,7 +1,7 @@
 // Time 15m. OUT.
-// Say if a Binary Tree is Height-Balanced: the depth of the 2 sub-trees never 
-// differ more than 1.
-// Constraints: number of nodes in [0, 5000]; node values in [-10^4, 10^4].
+// Return true if a Binary Tree is Height-Balanced: the depth of 2 sub-trees 
+//  never differ more than 1.
+// Constraints: number of nodes in [0, 5000].
 
 #include <algorithm>
 

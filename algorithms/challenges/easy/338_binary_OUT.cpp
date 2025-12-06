@@ -1,4 +1,6 @@
 // Time: 15m. OK for NlogN solution; OUT for the N solution.
+// Return an array[n+1] where array[i] stores the number of 1s in i.
+// Constraints: no __builtin_popcount(); n in [0, 10^5].
 
 #include <vector>
 

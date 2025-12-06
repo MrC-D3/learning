@@ -1,4 +1,6 @@
 // Time: 20m. OUT.
+// Return true if subRoot is a subtree of root.
+// Constraints: root.size in [1, 2000]; subRoot.size in [1, 1000].
 
 #include <string>
 

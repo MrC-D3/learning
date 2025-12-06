@@ -1,7 +1,6 @@
 // Time 15m. OK.
-// Given the root of a binary tree, invert the tree, and return its root.
-// Example: Input = [2,1,3]; Output = [2,3,1].
-// The number of nodes in the tree is in the range [0, 100].
+// Return the inversion of a btree: the left child swaps with the right child.
+// Constraints: the number of nodes in the tree is in the range [0, 100].
 
 #include <algorithm>
 

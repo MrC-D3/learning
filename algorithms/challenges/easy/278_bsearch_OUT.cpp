@@ -1,6 +1,6 @@
 // Time: 20m. OUT.
-// Find the lowest version V that returns isBadVersion(V)==true.
-// Constraints: 1 <= bad <= n <= 231 - 1
+// Find the lowest version in [1, n] that returns isBadVersion(V)==true.
+// Constraints: n in [1, 2^31 - 1].
 
 class Solution_iterative {
 public:

@@ -1,7 +1,6 @@
-// OUT OF TIME.
-// Time: 20m. Used: 50m.
-// Problem description.
-// ...
+// Time: 20m. OUT.
+// Return a merge non-decreasing sorted list from 2 non-decreasing sorted lists.
+// Constraints: list.size in [0,50]; node.val in [-100, 100]
 
 #include <iostream>
 

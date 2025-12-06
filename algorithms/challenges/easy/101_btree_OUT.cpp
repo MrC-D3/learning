@@ -1,4 +1,6 @@
 // Time: 20m. OUT.
+// Return true if a binary tree is symmetric.
+// Constraints: number of nodes in [1, 1000].
 
 #include <deque>
 #include <queue>

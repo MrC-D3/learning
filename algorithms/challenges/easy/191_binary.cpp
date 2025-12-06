@@ -1,4 +1,6 @@
 // Time: 15m. OK.
+// Return the Hamming weight: the number of bits at 1.
+// Constraints: n in [1, 2^31 - 1].
 
 // The Brian Kernighan's algorithm.
 // Better performance: O(W1), where W1 is the number of set bits of N.

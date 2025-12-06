@@ -1,4 +1,4 @@
-// Time: 20m. First time was ok, but didn't check the time!
+// Time: 20m. OUT.1
 // Return the longest prefix among a group of strings.
 // Constraints: strs.size in [1, 200]; strs[i].size in [0, 200]; only lowercase
 //  letters or empty string.

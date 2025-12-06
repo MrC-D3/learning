@@ -1,9 +1,6 @@
 // Time 15m. OK.
-// Given two strings s and t, return true if t is an anagram of s, and false 
-// otherwise.
-// Example: Input s = "anagram", t = "nagaram"; Output true.
-// 1 <= s.length, t.length <= 5 * 104
-// s and t consist of lowercase English letters.
+// Return true if t is an anagram of s.
+// Constraints: size of s and t in [1, 5 * 10^4]; only lowercase letters.
 
 #include <string>
 #include <unordered_map>

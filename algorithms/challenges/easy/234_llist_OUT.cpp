@@ -1,5 +1,5 @@
 // Time: 20m. OUT.
-// Return true if the Linked List is palindrome.
+// Return true if the Linked List is palindrome; in O(n) time and O(1) space.
 // Constraints: list size in [1, 10^5]; node->val in [0, 9].
 
 /* Definition for singly-linked list. */

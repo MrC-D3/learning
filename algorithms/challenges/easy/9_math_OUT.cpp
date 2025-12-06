@@ -1,6 +1,6 @@
 // Time: 15m. Ok for the O(N) space cost solution, OUT for the O(1) cost space.
 // Return true if an interger is palindrome in base10.
-// Constraints: 
+// Constraints: x in [-2^31, 2^31 - 1].
 
 #include <string>
 

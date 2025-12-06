@@ -1,6 +1,7 @@
 // Time: 20m. OUT.
-// Move all the 0s at the end and keep the existing order.
-// Constraints: nums.size in [1, 10^4].
+// Move all the 0s at the end and keep the existing order; do it in place and 
+//  minimize the number of operations.
+// Constraints: nums.size in [1, 10^4]; nums[i] in [-2^31, 2^31 - 1].
 
 #include <vector>
 

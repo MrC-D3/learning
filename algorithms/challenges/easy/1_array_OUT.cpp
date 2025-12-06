@@ -1,4 +1,6 @@
-// OUT OF TIME (15m).
+// Time: 15m. OUT.
+// Return the indexes of the 2 numbers whose sum is equal to target.
+// Constraints: nums.size() in [2, 10^4]; nums[i] and target in [-10^9, 10^9].
 
 #include <vector>
 #include <unordered_map>

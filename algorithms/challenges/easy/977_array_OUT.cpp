@@ -1,4 +1,7 @@
 // Time: 20m. OUT.
+// Return an ascending ordered array of the squares of nums[i], an ascending 
+//  ordered array. Do it in O(n).
+// Constraints: nums.size in [1, 10^4]; nums[i] in [-10^4, 10^4].
 
 #include <vector>
 #include <cmath>

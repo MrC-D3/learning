@@ -1,4 +1,5 @@
 // Time: 15m. OUT.
+// Return the bit-wise reversed of n. Then optimize it for many calls?
 // Constraints: __builtin_bitreverse32(n) not allowed.
 
 #include <iostream>

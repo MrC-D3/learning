@@ -1,11 +1,8 @@
 // Time 15m. OK.
-// A phrase is a palindrome if, after converting all uppercase letters into 
-// lowercase letters and removing all non-alphanumeric characters, it reads the 
-// same forward and backward. Alphanumeric characters include letters and 
-// numbers.
-// Given a string s, return true if it is a palindrome, or false otherwise.
-// Example: "A man, a plan, a canal: Panama" is a palindrome.
-// Example: " ", an empty string is a palindrome.
+// Return true if s is a palindrome, after converting to only lower case letters
+//  and removing non-alphanumeric chars.
+// Constraints: s.size in [1, 2*10^5].
+// Example of palindromes: "A man, a plan, a canal: Panama"; " ".
 
 #include <string>
 #include <cctype> // For isalnum() and tolower().
