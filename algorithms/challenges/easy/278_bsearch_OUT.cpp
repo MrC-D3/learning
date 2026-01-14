@@ -13,14 +13,12 @@ public:
         int end = n;
         while (start < end)
         {
+            // Doing directly (start+end)/2 can cause overflow!
             auto mid = start + ((end - start) / 2);
             if (isBadVersion(mid))
-            {
                 end = mid;
-                continue
-            }
-
-            start = mid + 1;
+            else
+                start = mid + 1;
         }
 
         return start;

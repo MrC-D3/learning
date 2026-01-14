@@ -1,14 +1,7 @@
-// Time: 15m. OUT.
+// The easy solution requires 15m, consider +5m for the medium solution, i.e.
+//  without stacks so with O(1) space. OUT.
 // Return true if 2 strings produce the same output on an editor, where # is
 //  considered a backspace.
-// Constraints: the 2 strings contains only lowercase letters or #, and their
-//  length is in [1, 200].
-
-#include <string>
-#include <stack>
-#include <array>
-
-using namespace std;
 
 class Solution {
 public:
@@ -113,48 +106,6 @@ public:
 
             i_s -= 1;
             i_t -= 1;
-        }
-
-        return true;
-    }
-};
-
-class Solution_v0 {
-public:
-    bool backspaceCompare(string s, string t) {
-        stack<char> stack_s, stack_t;
-
-        // Put this for() in a function since it repeats.
-        for (auto c : s)
-        {
-            if (c == '#')
-            {
-                if (!stack_s.empty())
-                    stack_s.pop();
-            }
-            else
-                stack_s.push(c);
-        }
-        for (auto c : t)
-        {
-            if (c == '#')
-            {
-                if (!stack_t.empty())
-                    stack_t.pop();
-            }
-            else
-                stack_t.push(c);
-        }
-
-        // You can directly compare 2 stacks instead of looping on them.
-        if (stack_s.size() != stack_t.size())
-            return false;
-        while (stack_s.size() > 0)
-        {
-            if (stack_s.top() != stack_t.top())
-                return false;
-            stack_s.pop();
-            stack_t.pop();
         }
 
         return true;

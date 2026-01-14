@@ -1,14 +1,14 @@
 // Time: 20m. OUT.
-// Return an ascending ordered array of the squares of nums[i], an ascending 
-//  ordered array. Do it in O(n).
-// Constraints: nums.size in [1, 10^4]; nums[i] in [-10^4, 10^4].
+// Return an ascending ordered array of the squares of nums[i], that is an  
+//  ascending-ordered array of values in [-10^4, 10^4]. Do it in O(n).
+// Constraints: nums.size in [1, 10^4].
 
 #include <vector>
 #include <cmath>
 
 using namespace std;
 
-// Solution that exploits the symmetry around 0.
+// This solution fills the output from the greatest value.
 class Solution {
 public:
     vector<int> sortedSquares(vector<int>& nums) {
@@ -30,6 +30,50 @@ public:
                 j--;
             }
         }
+
+        return result;
+    }
+};
+
+// This solution fills the output from the smallest value.
+class Solution_v0 {
+public:
+    vector<int> sortedSquares(vector<int>& nums) {
+        int mid = -1;
+        for (int i = 0; i < nums.size(); i++)
+        {
+            if (mid == -1 && nums[i] >= 0)
+            {
+                mid = i;
+            }
+
+            nums[i] *= nums[i];
+        }
+        if (mid == -1)
+        {
+            mid = nums.size();
+        }
+
+        int to_fill = 0;
+        vector<int> result(nums.size()); // Rember to declar a size!
+        int i = 0, j = 1; // Or: right=mid; left=mid-1.
+        while (mid + i < nums.size() && mid - j >= 0)
+        {
+            if (nums[mid+i] < nums[mid-j])
+            {
+                result[to_fill++] = nums[mid+i];
+                i++;
+            }
+            else
+            {
+                result[to_fill++] = nums[mid-j];
+                j++;
+            }
+        }
+        for ( ; mid + i < nums.size(); i++)
+            result[to_fill++] = nums[mid+i];
+        for ( ; mid - j >= 0; j++)
+            result[to_fill++] = nums[mid-j];
 
         return result;
     }

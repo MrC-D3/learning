@@ -36,6 +36,47 @@ public:
     }
 };
 
+class Solution_v4 { // Standard solution.
+public:
+    string addBinary(string a, string b) {
+        int ia = a.size() - 1;
+        int ib = b.size() - 1;
+        string result;
+
+        int carry = 0;
+        for ( ; ia >= 0 && ib >= 0; ia--, ib--)
+        {
+            auto bit_sum = (a[ia] - '0') + (b[ib] - '0') + carry;
+            auto bit = bit_sum % 2;
+            carry = bit_sum / 2;
+            result.push_back('0' + bit);
+        }
+
+        // If a is longer than b.
+        for ( ; ia >= 0; ia--)
+        {
+            auto bit_sum = (a[ia] - '0') + carry;
+            auto bit = bit_sum % 2;
+            carry = bit_sum / 2;
+            result.push_back('0' + bit);
+        }
+        // If b is longer than a.
+        for ( ; ib >= 0; ib--)
+        {
+            auto bit_sum = (b[ib] - '0') + carry;
+            auto bit = bit_sum % 2;
+            carry = bit_sum / 2;
+            result.push_back('0' + bit);
+        }
+        // If result is longer than both.
+        if (carry != 0)
+            result.push_back('1');
+
+        reverse(result.begin(), result.end());
+        return result;
+    }
+};
+
 class Solution_v3 { // Don't check which string is the shortest.
 public:
     string addBinary(string a, string b) {
@@ -228,7 +269,7 @@ public:
     }
 };
 
-class Solution_v0 {
+class Solution_v0 { // Using the difference in length between a and b.
 public:
     string addBinary(string a, string b) {
         string sum;

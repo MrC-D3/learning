@@ -1,5 +1,6 @@
-// Time: 15m. OUT.
-// Return the indexes of the 2 numbers whose sum is equal to target.
+// Time: 15m.
+// Return the indexes of the 2 numbers whose sum is equal to target. Indexes can
+//  be returned in any order; solution in O(N).
 // Constraints: nums.size() in [2, 10^4]; nums[i] and target in [-10^9, 10^9].
 
 #include <vector>
@@ -16,6 +17,12 @@ public:
         vector<int> to_return{0,1};
 
         unordered_map<int, int> seen;
+        // Since the indexes can be returned in any order, no need of 2 loops,
+        //  because if complement is after nums[i], when you read nums[i] you 
+        //  just store it in map and when you'll read complement you'll get from
+        //  the map. This also makes the map lighter, because the value is an
+        //  index not a vector and because you store only data till nums[i] not
+        // for the whole nums[] vector.
         for (int i = 0; i < nums.size(); i++)
         {
             auto complement = target - nums[i];

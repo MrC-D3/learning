@@ -1,5 +1,5 @@
-// Time: 20m. OUT.
-// Return a merge non-decreasing sorted list from 2 non-decreasing sorted lists.
+// Time: 20m.
+// Return a merged non-decreasing-sorted list from 2 non-decreasing lists.
 // Constraints: list.size in [0,50]; node.val in [-100, 100]
 
 #include <iostream>
@@ -13,7 +13,44 @@ struct ListNode {
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
+// Common solution.
 class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        ListNode dummy;
+        ListNode* it = &dummy;
+
+        while (list1 && list2)
+        {
+            if (list1->val < list2->val)
+            {
+                it->next = list1;
+                list1 = list1->next;
+            }
+            else
+            {
+                it->next = list2;
+                list2 = list2->next;             
+            }
+
+            it = it->next;
+        }
+        // This 2 ifs can become a single ?: instruction.
+        if (list1)
+        {
+            it->next = list1;
+        }
+        if (list2)
+        {
+            it->next = list2;
+        }
+
+        return dummy.next;
+    }
+};
+
+// Don't find the head, but still complicated.
+class Solution_v1 {
 public:
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
         if (list1 == nullptr)
@@ -54,7 +91,8 @@ public:
     }
 };
 
-class Solution_v1 {
+// Try to find which list is the head.
+class Solution_v0 {
 public:
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
         if (list1 == nullptr)

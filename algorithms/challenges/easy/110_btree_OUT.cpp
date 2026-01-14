@@ -18,9 +18,38 @@ struct TreeNode {
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-class Solution {
+class Solution { // My (uncommon) solution.
 public:
-    int get_height(TreeNode* root)
+    int compareSubtrees(TreeNode* a, TreeNode* b)
+    {
+        int diff_a = 0, diff_b = 0;
+        if (a)
+            diff_a = compareSubtrees(a->left, a->right);
+        if (b)
+            diff_b = compareSubtrees(b->left, b->right);
+
+        if (diff_a == -1 || diff_b == -1)
+            return -1;
+
+        diff_a += 1;
+        diff_b += 1;
+        if (abs(diff_a - diff_b) > 1)
+            return -1;
+
+        return max(diff_a, diff_b);
+    }
+
+    bool isBalanced(TreeNode* root) {
+        if (!root)
+            return true;
+
+        return compareSubtrees(root->left, root->right) != -1;
+    }
+};
+
+class Solution_v0 { // Canonical solution.
+public:
+    int get_height(TreeNode* root) // Get height... if balanced.
     {
         if (root == nullptr)
         {

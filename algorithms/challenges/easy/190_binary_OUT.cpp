@@ -12,7 +12,7 @@ class Solution {
 public:
     int reverseBits(int n) {
         // Static internal array is better because it's initialized once for all
-        //  the instance of Solution.
+        //  the instances of Solution.
         static uint8_t reversed[256];
         static bool initialized = false;
 
@@ -21,7 +21,7 @@ public:
         if (!initialized)
         {
             reversed[0] = 0;
-            for (uint8_t i = 1; i != 0; i++) // Overflow, don't use <256.
+            for (uint8_t i = 1; i != 0; i++) // Overflow, don't use "<256".
             {
                 uint8_t byte = i;
                 // Reverse 4-bytes groups.
@@ -45,32 +45,31 @@ public:
     }
 };
 
-// Optimal solution.
-class Solution_v1 {
+class Solution_v1 { // Optimal solution.
 public:
     int reverseBits(int n) {
-        // Swap 16-bits segments.
-        n = (n >> 16) | (n << 16);
+        // Masks must be unsigned so when used (&) the result is considered 
+        //  unsigned and the shift is logical not arithmetical.
+        // Here auto is risky because the compiler can treat the literal as int.
+        uint32_t lower_word = 0b00000000000000001111111111111111;
+        uint32_t upper_word = 0b11111111111111110000000000000000;
+        n = ((n & lower_word) << 16) | ((n & upper_word) >> 16);
 
-        // Then swap 8-bits segments.
-        auto odd_bytes = n & 0xFF00FF00;
-        auto even_bytes = n & 0x00FF00FF;
-        n = (odd_bytes >> 8) | (even_bytes << 8);
+        uint32_t even_bytes = 0b00000000111111110000000011111111;
+        uint32_t odd_bytes =  0b11111111000000001111111100000000;
+        n = ((n & even_bytes) << 8) | ((n & odd_bytes) >> 8);
 
-        // Then swap the 4-bits segments.
-        auto odd_nibbles = n & 0xF0F0F0F0;
-        auto even_nibbles = n & 0x0F0F0F0F;
-        n = (odd_nibbles >> 4) | (even_nibbles << 4);
+        uint32_t even_nibbles = 0b00001111000011110000111100001111;
+        uint32_t odd_nibbles =  0b11110000111100001111000011110000;
+        n = ((n & even_nibbles) << 4) | ((n & odd_nibbles) >> 4);
 
-        // Then swap 2-bits segments.
-        auto odd_couples = n & 0b11001100110011001100110011001100; // Or 0xCCCCCCCC.
-        auto even_couples = n & 0b00110011001100110011001100110011; // Or 0x33333333
-        n = (odd_couples >> 2) | (even_couples << 2);
+        uint32_t even_couples = 0b00110011001100110011001100110011;
+        uint32_t odd_couples =  0b11001100110011001100110011001100;
+        n = ((n & even_couples) << 2) | ((n & odd_couples) >> 2);
 
-        // Then swap 1-bit segment.
-        auto odd_bits = n & 0b10101010101010101010101010101010; // Or 0xAAAAAAAA.
-        auto even_bits = n & 0b01010101010101010101010101010101; // Or 0x55555555.
-        n = (odd_bits >> 1) | (even_bits << 1);
+        uint32_t even_ones = 0b01010101010101010101010101010101;
+        uint32_t odd_ones =  0b10101010101010101010101010101010;
+        n = ((n & even_ones) << 1) | ((n & odd_ones) >> 1);
 
         return n;
     }

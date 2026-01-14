@@ -1,4 +1,4 @@
-// Time: 20m. OUT.
+// Time: 20m.
 // Return true if the Linked List is palindrome; in O(n) time and O(1) space.
 // Constraints: list size in [1, 10^5]; node->val in [0, 9].
 
@@ -11,7 +11,46 @@ struct ListNode {
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
-class Solution { // Like v0 but reverse the 2nd half.
+// Like v1, but less variables.
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        // Find the mid of the list.
+        auto it_slow = head;
+        auto it_fast = head;
+        while (it_fast && it_fast->next)
+        {
+            it_slow = it_slow->next;
+            it_fast = it_fast->next->next;
+        }
+        if (it_fast)
+            it_slow = it_slow->next;
+
+        // Reverse the half list pointed by it_slow.
+        ListNode* reversed_head = nullptr;
+        while (it_slow)
+        {
+            auto tmp = reversed_head;
+            reversed_head = it_slow;
+            it_slow = it_slow->next;
+            reversed_head->next = tmp;
+        }
+
+        while (reversed_head)
+        {
+            if (reversed_head->val != head->val)
+                return false;
+            
+            reversed_head = reversed_head->next;
+            head = head->next;
+        }
+
+        return true;
+    }
+};
+
+// Like v0 but reverse the 2nd half.
+class Solution_v1 {
 public:
     bool isPalindrome(ListNode* head) {
         if (head->next == nullptr)
@@ -83,8 +122,6 @@ public:
         }
         if (fast != nullptr)
             slow = slow->next;
-        cout << slow->val << endl;
-        cout << reverse_head->val << endl;
 
         // Now compare.
         auto it_reverse{reverse_head};

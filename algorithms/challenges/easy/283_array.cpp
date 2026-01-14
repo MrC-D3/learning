@@ -1,6 +1,6 @@
-// Time: 20m. OUT.
+// Time: 20m.
 // Move all the 0s at the end and keep the existing order; do it in place and 
-//  minimize the number of operations.
+//  minimize the number of operations. O(N).
 // Constraints: nums.size in [1, 10^4]; nums[i] in [-2^31, 2^31 - 1].
 
 #include <vector>
@@ -21,6 +21,25 @@ public:
                 nums[i] = 0;
             }
             to_fill++;
+        }
+    }
+};
+
+class Solution { // Less elegant than the solution above, but still O(N).
+public:
+    void moveZeroes(vector<int>& nums) {
+        int i = 0;
+        for (int to_fill = 0; to_fill < nums.size(); to_fill++)
+        {
+            if (nums[to_fill] != 0)
+                continue;
+            for (i = max(i, to_fill) + 1; i < nums.size(); i++)
+            {
+                if (nums[i] == 0)
+                    continue;
+                swap(nums[to_fill], nums[i]);
+                break;
+            }
         }
     }
 };

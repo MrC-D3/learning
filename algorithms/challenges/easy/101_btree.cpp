@@ -1,4 +1,4 @@
-// Time: 20m. OUT.
+// Time: 20m.
 // Return true if a binary tree is symmetric.
 // Constraints: number of nodes in [1, 1000].
 
@@ -17,18 +17,21 @@ struct TreeNode {
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-class Solution { // Recursive solution.
+class Solution {
 public:
-    bool compareTrees(TreeNode* left, TreeNode* right)
+    // Recursive solution.
+    bool compareTrees(TreeNode* a, TreeNode* b)
     {
-        if (left == nullptr && right == nullptr)
+        // Kind of XOR: go in when only one is nullptr.
+        if ((!a) != (!b))
+            return false;
+        if ((!a) && (!b))
             return true;
-        if (left == nullptr || right == nullptr)
+        if (a->val != b->val)
             return false;
-        if (left->val != right->val)
-            return false;
-        return compareTrees(left->left, right->right) 
-          && compareTrees(left->right, right->left);
+            
+        return compareTrees(a->left, b->right) 
+          && compareTrees(a->right, b->left);
     }
 
     bool isSymmetric(TreeNode* root) {
@@ -36,8 +39,9 @@ public:
     }
 };
 
-class Solution_v1 { // Most compact iterative solution.
+class Solution_v1 {
 public:
+    // Most compact iterative solution.
     bool isSymmetric(TreeNode* root) {
         queue<TreeNode*> nodes; // No need to use deque.
         nodes.push(root->left);
@@ -71,6 +75,7 @@ public:
 
 class Solution_v0 {
 public:
+    // Iterative solution.
     bool isSymmetric(TreeNode* root) {
         deque<TreeNode*> nodes;
         nodes.push_back(root);

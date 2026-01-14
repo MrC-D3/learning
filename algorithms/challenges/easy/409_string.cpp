@@ -1,4 +1,4 @@
-// Time 20m. OUT.
+// Time 20m.
 // Return the length of the longest polindrome you can build.
 // Constraints: letters are case SENSITIVE (so "Aa" is not palindrome).
 
@@ -6,6 +6,45 @@
 #include <array>
 
 using namespace std;
+
+
+class Solution
+{
+public:
+    int longestPalindrome(string s) 
+    {
+        // It's a string, so the key of the map can only be in the range of the
+        //  ASCII value and arrays are faster than maps.
+        array<int, 128> counts{0};
+
+        for (auto c : s)
+        {
+            counts[c] += 1;
+        }
+
+        int longest = 0;
+        for (auto count : counts)
+        {
+            // Doing (count&1)==0 is faster. Don't forget the parenthesis since
+            //  operator== has higher priority than operator&.
+            if (count % 2 == 0)
+            {
+                longest += count;
+            }
+            else
+            {
+                longest += count - 1;
+            }
+        }
+
+        if (longest < s.size())
+        {
+            longest += 1;
+        }
+
+        return longest;
+    }
+};
 
 class Solution {
 public:
@@ -15,6 +54,7 @@ public:
         array<int, alphabet_size*2> frequencies;
         for (auto c : s)
         {
+            // Use islower() to distinguish between lower and upper letters.
             if (c >= 'A' && c <= 'Z')
             {
                 frequencies[alphabet_size + c - 'A'] += 1;
@@ -41,41 +81,5 @@ public:
 
         // Or just add 1 if result < s.size().
         return result + odd;
-    }
-};
-
-class Solution_original
-{
-public:
-    int longestPalindrome(string s) 
-    {
-        // Constraints say: s consists of lowercase/uppercase letters only.
-        //  So, you can use an array that has less overhead than a map.
-        array<int, 128> counts{0};
-
-        for (auto c : s)
-        {
-            counts[c] += 1;
-        }
-
-        int longest = 0;
-        for (auto count : counts)
-        {
-            if (count % 2 == 0)
-            {
-                longest += count;
-            }
-            else
-            {
-                longest += count - 1;
-            }
-        }
-
-        if (longest < s.size())
-        {
-            longest += 1;
-        }
-
-        return longest;
     }
 };
