@@ -1,12 +1,13 @@
-// Time: 20m. OUT.
+// Time: 20m for the easy solution (with sorting), so consider +5m for the 
+//  medium solution withtou sorting.
 // Return an ascending ordered array of the squares of nums[i], that is an  
 //  ascending-ordered array of values in [-10^4, 10^4]. Do it in O(n).
 // Constraints: nums.size in [1, 10^4].
 
 #include <vector>
-#include <cmath>
 
 using namespace std;
+
 
 // This solution fills the output from the greatest value.
 class Solution {

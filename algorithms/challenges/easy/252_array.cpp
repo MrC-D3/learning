@@ -8,7 +8,6 @@
 using namespace std;
 
 /* Definition of Interval. */
-
 class Interval {
 public:
     int start, end;
